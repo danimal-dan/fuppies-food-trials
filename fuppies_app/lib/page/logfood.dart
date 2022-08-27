@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fuppies_app/widget/food_list_dropdown.dart';
 
 class LogFoodPage extends StatefulWidget {
   const LogFoodPage({Key? key}) : super(key: key);
@@ -14,14 +15,15 @@ class _LogFoodPageState extends State<LogFoodPage> {
       appBar: AppBar(
         title: const Text('Log Food'),
       ),
-      body: Center(
-        child: Column(
+      body: Form(
+        child: Center(
+            child: Column(
           children: const <Widget>[
-            Text('food name'),
+            FoodListDropdown(),
             Text('date time'),
             Text('amount'),
           ],
-        ),
+        )),
       ),
     );
   }
