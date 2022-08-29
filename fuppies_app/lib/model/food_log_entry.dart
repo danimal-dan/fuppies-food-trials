@@ -6,4 +6,9 @@ class FoodLogEntry {
   DateTime date = DateTime.now();
   double volumeAmount = 0;
   VolumeUnit volumeUnit = VolumeUnit.teaspoon;
+
+  @override
+  String toString() {
+    return "{Food: ${food?.displayName}, Date: $date, Volume: $volumeAmount ${volumeUnit.displayName}}";
+  }
 }

@@ -12,6 +12,8 @@ class LogFoodPage extends StatefulWidget {
 }
 
 class _LogFoodPageState extends State<LogFoodPage> {
+  static const SizedBox spacer = SizedBox(height: 10);
+
   final _formKey = GlobalKey();
   final _model = FoodLogEntry();
 
@@ -33,7 +35,7 @@ class _LogFoodPageState extends State<LogFoodPage> {
                     onChanged: (Food? food) {
                       _model.food = food;
                     }),
-                const SizedBox(height: 10),
+                spacer,
                 DateTimeInput(
                   defaultValue: _model.date,
                   onChanged: (DateTime? date) {
@@ -44,18 +46,17 @@ class _LogFoodPageState extends State<LogFoodPage> {
                     _model.date = date;
                   },
                 ),
-                const SizedBox(height: 10),
+                spacer,
                 const Text('amount'),
-                const SizedBox(height: 10),
+                spacer,
                 const Text('like/dislike'),
-                const SizedBox(height: 10),
+                spacer,
                 Container(
                     padding: const EdgeInsets.symmetric(
                         vertical: 16.0, horizontal: 16.0),
                     child: ElevatedButton(
                         onPressed: () {
-                          final form = _formKey.currentState;
-                          print(_model.food);
+                          debugPrint(_model.toString());
                         },
                         child: const Text('Save'))),
               ],
