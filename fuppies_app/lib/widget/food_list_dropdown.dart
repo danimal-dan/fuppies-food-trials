@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:fuppies_app/model/food.dart';
 
 class FoodListDropdown extends StatefulWidget {
-  const FoodListDropdown({Key? key}) : super(key: key);
+  final Food? defaultValue;
+  final void Function(Food?)? onChanged;
+
+  const FoodListDropdown({Key? key, this.defaultValue, this.onChanged})
+      : super(key: key);
 
   @override
   State<FoodListDropdown> createState() => _FoodListDropdown();
@@ -12,6 +16,12 @@ class _FoodListDropdown extends State<FoodListDropdown> {
   Food? selectedFood;
 
   @override
+  void initState() {
+    super.initState();
+    selectedFood = widget.defaultValue;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return DropdownButton(
         value: selectedFood,
@@ -19,6 +29,8 @@ class _FoodListDropdown extends State<FoodListDropdown> {
           setState(() {
             selectedFood = newValue;
           });
+
+          widget.onChanged?.call(newValue);
         },
         items: Food.values
             .map<DropdownMenuItem<Food>>((Food value) =>
