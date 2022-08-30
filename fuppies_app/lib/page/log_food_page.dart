@@ -31,19 +31,21 @@ class _LogFoodPageState extends State<LogFoodPage> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 FoodListDropdown(
+                    key: Key(_model.food.toString()),
                     defaultValue: _model.food,
                     onChanged: (Food? food) {
-                      _model.food = food;
+                      setState(() {
+                        _model.food = food;
+                      });
                     }),
                 spacer,
                 DateTimeInput(
+                  key: Key(_model.date.millisecondsSinceEpoch.toString()),
                   defaultValue: _model.date,
                   onChanged: (DateTime? date) {
-                    if (date == null) {
-                      return;
-                    }
-
-                    _model.date = date;
+                    setState(() {
+                      _model.date = date ?? DateTime.now();
+                    });
                   },
                 ),
                 spacer,

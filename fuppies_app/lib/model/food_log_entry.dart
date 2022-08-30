@@ -9,6 +9,6 @@ class FoodLogEntry {
 
   @override
   String toString() {
-    return "{Food: ${food?.displayName}, Date: $date, Volume: $volumeAmount ${volumeUnit.displayName}}";
+    return "{Food: ${food?.displayName}, Date: $date, Volume: $volumeAmount ${volumeUnit.abbreviation}}";
   }
 }

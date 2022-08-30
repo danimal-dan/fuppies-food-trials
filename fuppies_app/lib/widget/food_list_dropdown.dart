@@ -24,6 +24,7 @@ class _FoodListDropdown extends State<FoodListDropdown> {
   @override
   Widget build(BuildContext context) {
     return DropdownButton(
+        key: Key(selectedFood.toString()),
         value: selectedFood,
         onChanged: (Food? newValue) {
           setState(() {

@@ -23,6 +23,32 @@ class _DateTimeInput extends State<DateTimeInput> {
 
   @override
   Widget build(BuildContext context) {
-    return Text(prettyPrintDateTime(selectedDateTime));
+    DateTime initialDateTime = selectedDateTime ?? DateTime.now();
+    final String displayString = prettyPrintDateTime(initialDateTime);
+
+    return TextFormField(
+        key: Key(initialDateTime.millisecondsSinceEpoch.toString()),
+        initialValue: displayString,
+        onTap: () async {
+          final DateTime? picked = await showDatePicker(
+              context: context,
+              initialDate: initialDateTime,
+              firstDate: initialDateTime.subtract(const Duration(days: 365)),
+              lastDate: DateTime.now());
+
+          final DateTime pickedDateWithOriginalTime = DateTime(
+              picked?.year ?? initialDateTime.year,
+              picked?.month ?? initialDateTime.month,
+              picked?.day ?? initialDateTime.day,
+              initialDateTime.hour,
+              initialDateTime.minute,
+              initialDateTime.second);
+
+          setState(() {
+            selectedDateTime = pickedDateWithOriginalTime;
+          });
+
+          widget.onChanged?.call(pickedDateWithOriginalTime);
+        });
   }
 }
