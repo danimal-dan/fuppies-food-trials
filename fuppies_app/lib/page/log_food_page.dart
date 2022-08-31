@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fuppies_app/model/food.dart';
 import 'package:fuppies_app/model/food_log_entry.dart';
+import 'package:fuppies_app/model/volume_unit.dart';
 import 'package:fuppies_app/widget/food_list_dropdown.dart';
 import 'package:fuppies_app/widget/date_time_input.dart';
 
@@ -49,7 +50,33 @@ class _LogFoodPageState extends State<LogFoodPage> {
                   },
                 ),
                 spacer,
-                const Text('amount'),
+                Row(
+                  children: <Widget>[
+                    Flexible(
+                        child: TextFormField(
+                      key: Key(_model.volumeAmount.toString()),
+                      initialValue: _model.volumeAmount.toString(),
+                      keyboardType: TextInputType.number,
+                    )),
+                    DropdownButton(
+                      key: Key(_model.volumeUnit.abbreviation),
+                      value: _model.volumeUnit,
+                      items: VolumeUnit.values
+                          .map((unit) => DropdownMenuItem(
+                                value: unit,
+                                child: Text(unit.abbreviation),
+                              ))
+                          .toList(),
+                      onChanged: (VolumeUnit? unit) {
+                        setState(() {
+                          if (unit != null) {
+                            _model.volumeUnit = unit;
+                          }
+                        });
+                      },
+                    )
+                  ],
+                ),
                 spacer,
                 const Text('like/dislike'),
                 spacer,

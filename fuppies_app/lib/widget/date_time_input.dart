@@ -36,13 +36,19 @@ class _DateTimeInput extends State<DateTimeInput> {
               firstDate: initialDateTime.subtract(const Duration(days: 365)),
               lastDate: DateTime.now());
 
+          final TimeOfDay? pickedTime = await showTimePicker(
+              context: context,
+              initialTime: TimeOfDay(
+                  hour: initialDateTime.hour, minute: initialDateTime.minute),
+              initialEntryMode: TimePickerEntryMode.input);
+
           final DateTime pickedDateWithOriginalTime = DateTime(
               picked?.year ?? initialDateTime.year,
               picked?.month ?? initialDateTime.month,
               picked?.day ?? initialDateTime.day,
-              initialDateTime.hour,
-              initialDateTime.minute,
-              initialDateTime.second);
+              pickedTime?.hour ?? initialDateTime.hour,
+              pickedTime?.minute ?? initialDateTime.minute,
+              0);
 
           setState(() {
             selectedDateTime = pickedDateWithOriginalTime;
