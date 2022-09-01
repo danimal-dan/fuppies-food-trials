@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:fuppies_app/model/food.dart';
 import 'package:fuppies_app/model/food_log_entry.dart';
+import 'package:fuppies_app/model/food_reaction.dart';
 import 'package:fuppies_app/model/volume_unit.dart';
 import 'package:fuppies_app/widget/food_list_dropdown.dart';
 import 'package:fuppies_app/widget/date_time_input.dart';
+import 'package:fuppies_app/widget/food_reaction_choice_chip.dart';
 
 class LogFoodPage extends StatefulWidget {
   const LogFoodPage({Key? key}) : super(key: key);
@@ -13,7 +15,7 @@ class LogFoodPage extends StatefulWidget {
 }
 
 class _LogFoodPageState extends State<LogFoodPage> {
-  static const SizedBox spacer = SizedBox(height: 10);
+  static const SizedBox spacer = SizedBox(height: 24.0);
 
   final _formKey = GlobalKey();
   final _model = FoodLogEntry();
@@ -31,17 +33,16 @@ class _LogFoodPageState extends State<LogFoodPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                FoodListDropdown(
-                    key: Key(_model.food.toString()),
-                    defaultValue: _model.food,
-                    onChanged: (Food? food) {
-                      setState(() {
-                        _model.food = food;
-                      });
-                    }),
+                Flexible(
+                    child: FoodListDropdown(
+                        defaultValue: _model.food,
+                        onChanged: (Food? food) {
+                          setState(() {
+                            _model.food = food;
+                          });
+                        })),
                 spacer,
                 DateTimeInput(
-                  key: Key(_model.date.millisecondsSinceEpoch.toString()),
                   defaultValue: _model.date,
                   onChanged: (DateTime? date) {
                     setState(() {
@@ -52,14 +53,26 @@ class _LogFoodPageState extends State<LogFoodPage> {
                 spacer,
                 Row(
                   children: <Widget>[
-                    Flexible(
+                    Expanded(
+                        flex: 2,
                         child: TextFormField(
-                      key: Key(_model.volumeAmount.toString()),
-                      initialValue: _model.volumeAmount.toString(),
-                      keyboardType: TextInputType.number,
-                    )),
-                    DropdownButton(
-                      key: Key(_model.volumeUnit.abbreviation),
+                          initialValue: _model.volumeAmount.toString(),
+                          keyboardType: TextInputType.number,
+                          onChanged: (String? amount) {
+                            setState(() {
+                              _model.volumeAmount =
+                                  double.tryParse(amount ?? '')?.toDouble() ??
+                                      0.0;
+                            });
+                          },
+                          decoration: const InputDecoration(
+                            border: UnderlineInputBorder(),
+                            labelText: 'Amount',
+                            contentPadding: EdgeInsets.all(0.0),
+                          ),
+                        )),
+                    Flexible(
+                        child: DropdownButtonFormField(
                       value: _model.volumeUnit,
                       items: VolumeUnit.values
                           .map((unit) => DropdownMenuItem(
@@ -74,11 +87,23 @@ class _LogFoodPageState extends State<LogFoodPage> {
                           }
                         });
                       },
-                    )
+                      decoration: const InputDecoration(
+                        border: UnderlineInputBorder(),
+                        labelText: 'Unit',
+                        contentPadding: EdgeInsets.all(0.0),
+                      ),
+                    ))
                   ],
                 ),
                 spacer,
-                const Text('like/dislike'),
+                Flexible(
+                    child: FoodReactionChoiceChip(
+                        defaultValue: _model.reaction,
+                        onChanged: (FoodReaction? reaction) {
+                          setState(() {
+                            _model.reaction = reaction;
+                          });
+                        })),
                 spacer,
                 Container(
                     padding: const EdgeInsets.symmetric(

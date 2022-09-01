@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart';
 
-DateFormat defaultDateTimeFormat = DateFormat('yyyy-MM-dd hh:mm a');
+DateFormat defaultDateTimeFormat = DateFormat('M/d/yy hh:mm a');
 DateFormat defaultTimeFormat = DateFormat('hh:mm a');
 
 String prettyPrintDateTime(DateTime? dateTime) {

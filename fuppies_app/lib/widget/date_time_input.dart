@@ -27,34 +27,44 @@ class _DateTimeInput extends State<DateTimeInput> {
     final String displayString = prettyPrintDateTime(initialDateTime);
 
     return TextFormField(
-        key: Key(initialDateTime.millisecondsSinceEpoch.toString()),
-        initialValue: displayString,
-        onTap: () async {
-          final DateTime? picked = await showDatePicker(
-              context: context,
-              initialDate: initialDateTime,
-              firstDate: initialDateTime.subtract(const Duration(days: 365)),
-              lastDate: DateTime.now());
+      key: Key(initialDateTime.millisecondsSinceEpoch.toString()),
+      initialValue: displayString,
+      onTap: () async {
+        final DateTime? picked = await showDatePicker(
+            context: context,
+            initialDate: initialDateTime,
+            firstDate: initialDateTime.subtract(const Duration(days: 365)),
+            lastDate: DateTime.now());
 
-          final TimeOfDay? pickedTime = await showTimePicker(
-              context: context,
-              initialTime: TimeOfDay(
-                  hour: initialDateTime.hour, minute: initialDateTime.minute),
-              initialEntryMode: TimePickerEntryMode.input);
+        if (picked == null) {
+          return;
+        }
 
-          final DateTime pickedDateWithOriginalTime = DateTime(
-              picked?.year ?? initialDateTime.year,
-              picked?.month ?? initialDateTime.month,
-              picked?.day ?? initialDateTime.day,
-              pickedTime?.hour ?? initialDateTime.hour,
-              pickedTime?.minute ?? initialDateTime.minute,
-              0);
+        final TimeOfDay? pickedTime = await showTimePicker(
+            context: context,
+            initialTime: TimeOfDay(
+                hour: initialDateTime.hour, minute: initialDateTime.minute),
+            initialEntryMode: TimePickerEntryMode.input);
 
-          setState(() {
-            selectedDateTime = pickedDateWithOriginalTime;
-          });
+        final DateTime pickedDateWithOriginalTime = DateTime(
+            picked.year,
+            picked.month,
+            picked.day,
+            pickedTime?.hour ?? initialDateTime.hour,
+            pickedTime?.minute ?? initialDateTime.minute,
+            0);
 
-          widget.onChanged?.call(pickedDateWithOriginalTime);
+        setState(() {
+          selectedDateTime = pickedDateWithOriginalTime;
         });
+
+        widget.onChanged?.call(pickedDateWithOriginalTime);
+      },
+      decoration: const InputDecoration(
+        border: UnderlineInputBorder(),
+        labelText: 'Date',
+        contentPadding: EdgeInsets.all(0.0),
+      ),
+    );
   }
 }

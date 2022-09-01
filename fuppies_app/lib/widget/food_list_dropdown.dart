@@ -23,19 +23,25 @@ class _FoodListDropdown extends State<FoodListDropdown> {
 
   @override
   Widget build(BuildContext context) {
-    return DropdownButton(
-        key: Key(selectedFood.toString()),
-        value: selectedFood,
-        onChanged: (Food? newValue) {
-          setState(() {
-            selectedFood = newValue;
-          });
+    return DropdownButtonFormField(
+      key: Key(selectedFood.toString()),
+      value: selectedFood,
+      onChanged: (Food? newValue) {
+        setState(() {
+          selectedFood = newValue;
+        });
 
-          widget.onChanged?.call(newValue);
-        },
-        items: Food.values
-            .map<DropdownMenuItem<Food>>((Food value) =>
-                DropdownMenuItem(value: value, child: Text(value.displayName)))
-            .toList());
+        widget.onChanged?.call(newValue);
+      },
+      items: Food.values
+          .map<DropdownMenuItem<Food>>((Food value) =>
+              DropdownMenuItem(value: value, child: Text(value.displayName)))
+          .toList(),
+      decoration: const InputDecoration(
+        border: UnderlineInputBorder(),
+        labelText: 'Food',
+        contentPadding: EdgeInsets.all(0.0),
+      ),
+    );
   }
 }
