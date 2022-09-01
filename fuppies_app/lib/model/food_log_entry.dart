@@ -1,6 +1,6 @@
-import 'package:fuppies_app/model/food.dart';
-import 'package:fuppies_app/model/food_reaction.dart';
-import 'package:fuppies_app/model/volume_unit.dart';
+import 'food.dart';
+import 'food_reaction.dart';
+import 'volume_unit.dart';
 
 class FoodLogEntry {
   Food? food;
