@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fuppies_app/page/logfood.dart';
+import 'package:fuppies_app/page/log_food_page.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
