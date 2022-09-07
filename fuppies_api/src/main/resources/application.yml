@@ -1,0 +1,12 @@
+spring:
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    mapper:
+      use-base-type-as-default-impl: true
+
+aws.dynamo-db:
+  endpoint: http://localhost:8000
+
+logging.level:
+  com.amazonaws: debug

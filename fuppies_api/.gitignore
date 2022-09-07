@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Dynamo DB Data ###
+.docker/dynamodb
