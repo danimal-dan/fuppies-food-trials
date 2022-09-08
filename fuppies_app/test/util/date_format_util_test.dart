@@ -1,7 +1,7 @@
 import 'package:fuppies_app/util/date_format_util.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-const Duration ONE_DAY = Duration(days: 1);
+const Duration oneDay = Duration(days: 1);
 void main() {
   group('Date Format Util', () {
     test('today should display as today', () {
@@ -9,12 +9,12 @@ void main() {
     });
 
     test('yesterday should display as yesterday', () {
-      expect(prettyPrintDateTime(DateTime.now().subtract(ONE_DAY)),
+      expect(prettyPrintDateTime(DateTime.now().subtract(oneDay)),
           startsWith('Yesterday'));
     });
 
     test('tomorrow should display as tomorrow', () {
-      expect(prettyPrintDateTime(DateTime.now().add(ONE_DAY)),
+      expect(prettyPrintDateTime(DateTime.now().add(oneDay)),
           startsWith('Tomorrow'));
     });
 
