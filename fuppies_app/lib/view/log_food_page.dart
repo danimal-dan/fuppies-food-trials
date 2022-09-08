@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fuppies_app/http/log_food_controller.dart';
 import 'package:fuppies_app/model/food.dart';
 import 'package:fuppies_app/model/food_log_entry.dart';
 import 'package:fuppies_app/model/food_reaction.dart';
@@ -18,7 +19,8 @@ class _LogFoodPageState extends State<LogFoodPage> {
   static const SizedBox spacer = SizedBox(height: 24.0);
 
   final _formKey = GlobalKey();
-  final _model = FoodLogEntry();
+  FoodLogEntry _model = FoodLogEntry();
+  bool _isSaving = false;
 
   @override
   Widget build(BuildContext context) {
@@ -109,10 +111,29 @@ class _LogFoodPageState extends State<LogFoodPage> {
                     padding: const EdgeInsets.symmetric(
                         vertical: 16.0, horizontal: 16.0),
                     child: ElevatedButton(
-                        onPressed: () {
-                          debugPrint(_model.toString());
+                        style: ElevatedButton.styleFrom(
+                            padding: const EdgeInsets.all(16.0)),
+                        onPressed: () async {
+                          setState(() {
+                            _isSaving = true;
+                          });
+
+                          try {
+                            var response =
+                                await LogFoodController().create(_model);
+                            setState(() {
+                              _model = response;
+                            });
+                          } finally {
+                            _isSaving = false;
+                          }
                         },
-                        child: const Text('Save'))),
+                        child: _isSaving
+                            ? const CircularProgressIndicator(
+                                color: Colors.white,
+                                strokeWidth: 2.0,
+                              )
+                            : const Text('Save'))),
               ],
             ),
           )),
