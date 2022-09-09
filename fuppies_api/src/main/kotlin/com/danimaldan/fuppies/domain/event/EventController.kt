@@ -10,7 +10,7 @@ class EventController(private val eventRepository: EventRepository) {
     fun get(@PathVariable id: String): Event<*> {
         val event = eventRepository.findById(id, Child.MILLIE.uuid);
 
-        return event ?: throw IllegalArgumentException("$id not found");
+        return event ?: throw IllegalArgumentException("Event $id not found");
     }
 
     @DeleteMapping("{id}")

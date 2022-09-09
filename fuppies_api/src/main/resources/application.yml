@@ -4,6 +4,10 @@ spring:
       write-dates-as-timestamps: false
     mapper:
       use-base-type-as-default-impl: true
+  security:
+    user:
+      name: user
+      password: fuppies_pass
 
 aws.dynamo-db:
   endpoint: http://localhost:8000
