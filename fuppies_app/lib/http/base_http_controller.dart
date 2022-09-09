@@ -1,3 +1,6 @@
+import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:fuppies_app/http/auth_credential_provider.dart';
 import 'package:http/http.dart' as http;
 
 class BaseHttpController {
@@ -16,8 +19,14 @@ class _FuppiesHttpClient extends http.BaseClient {
   _FuppiesHttpClient(this._inner);
 
   @override
-  Future<http.StreamedResponse> send(http.BaseRequest request) {
-    request.headers['Authorization'] = 'Bearer 129308asdfakdladfklja1w3e4098';
+  Future<http.StreamedResponse> send(http.BaseRequest request) async {
+    String? token = await AuthCredentialProvider.getToken();
+    if (token == null) {
+      ErrorDescription("Token is empty, cannot make API request");
+    }
+
+    request.headers['Authorization'] =
+        "Basic ${base64.encode(utf8.encode('user:$token'))}";
     request.headers['Content-type'] = 'application/json';
     return _inner.send(request);
   }
