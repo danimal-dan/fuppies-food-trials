@@ -1,4 +1,4 @@
-package com.danimaldan.fuppies.config
+package dev.danimal.fuppies.config
 
 import org.springframework.boot.context.properties.ConfigurationProperties
 import org.springframework.boot.context.properties.ConstructorBinding

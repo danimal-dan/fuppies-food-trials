@@ -1,7 +1,7 @@
-package com.danimaldan.fuppies.domain.event
+package dev.danimal.fuppies.domain.event
 
-import com.danimaldan.fuppies.domain.child.Child
 import com.fasterxml.jackson.databind.ObjectMapper
+import dev.danimal.fuppies.domain.child.Child
 import mu.KotlinLogging
 import org.springframework.stereotype.Repository
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient

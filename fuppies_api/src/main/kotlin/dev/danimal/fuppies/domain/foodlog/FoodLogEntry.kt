@@ -1,7 +1,7 @@
-package com.danimaldan.fuppies.domain.foodlog
+package dev.danimal.fuppies.domain.foodlog
 
-import com.danimaldan.fuppies.domain.event.EventDetails
 import com.fasterxml.jackson.annotation.JsonTypeName
+import dev.danimal.fuppies.domain.event.EventDetails
 import java.time.ZonedDateTime
 import java.util.*
 

@@ -1,6 +1,6 @@
-package com.danimaldan.fuppies.domain.event
+package dev.danimal.fuppies.domain.event
 
-import com.danimaldan.fuppies.domain.child.Child
+import dev.danimal.fuppies.domain.child.Child
 import java.util.*
 
 data class Event<T : EventDetails>(

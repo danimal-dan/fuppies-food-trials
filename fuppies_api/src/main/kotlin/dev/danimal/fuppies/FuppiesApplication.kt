@@ -1,4 +1,4 @@
-package com.danimaldan.fuppies
+package dev.danimal.fuppies
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.context.properties.EnableConfigurationProperties

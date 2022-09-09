@@ -1,4 +1,4 @@
-package com.danimaldan.fuppies.domain.auth
+package dev.danimal.fuppies.domain.auth
 
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping

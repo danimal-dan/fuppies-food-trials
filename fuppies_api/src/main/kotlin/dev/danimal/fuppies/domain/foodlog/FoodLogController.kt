@@ -1,8 +1,8 @@
-package com.danimaldan.fuppies.domain.foodlog
+package dev.danimal.fuppies.domain.foodlog
 
-import com.danimaldan.fuppies.domain.child.Child
-import com.danimaldan.fuppies.domain.event.Event
-import com.danimaldan.fuppies.domain.event.EventRepository
+import dev.danimal.fuppies.domain.child.Child
+import dev.danimal.fuppies.domain.event.Event
+import dev.danimal.fuppies.domain.event.EventRepository
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping

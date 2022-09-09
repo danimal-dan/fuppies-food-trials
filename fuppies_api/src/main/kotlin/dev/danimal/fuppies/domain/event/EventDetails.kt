@@ -1,8 +1,8 @@
-package com.danimaldan.fuppies.domain.event
+package dev.danimal.fuppies.domain.event
 
-import com.danimaldan.fuppies.domain.foodlog.FoodLogEntry
 import com.fasterxml.jackson.annotation.JsonSubTypes
 import com.fasterxml.jackson.annotation.JsonTypeInfo
+import dev.danimal.fuppies.domain.foodlog.FoodLogEntry
 import java.time.ZonedDateTime
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")

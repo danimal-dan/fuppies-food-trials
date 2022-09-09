@@ -1,4 +1,4 @@
-package com.danimaldan.fuppies.domain.foodlog
+package dev.danimal.fuppies.domain.foodlog
 
 import org.junit.jupiter.api.Test
 import java.time.ZonedDateTime

@@ -1,4 +1,4 @@
-package com.danimaldan.fuppies.config
+package dev.danimal.fuppies.config
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

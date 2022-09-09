@@ -1,4 +1,4 @@
-package com.danimaldan.fuppies.config
+package dev.danimal.fuppies.config
 
 import mu.KotlinLogging
 import org.springframework.boot.context.properties.EnableConfigurationProperties
