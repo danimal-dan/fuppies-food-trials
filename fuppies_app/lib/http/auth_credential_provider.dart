@@ -1,6 +1,6 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ApiAuthProvider {
+class AuthCredentialProvider {
   static const String _tokenKey = 'fuppies_token';
 
   static Future<bool> hasToken() async {

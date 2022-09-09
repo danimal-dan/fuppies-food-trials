@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '/http/api_auth_provider.dart';
+import '../http/auth_credential_provider.dart';
 import '/http/auth_controller.dart';
 
 class ApiAuthTokenDialog extends StatefulWidget {
@@ -46,11 +46,11 @@ class _ApiAuthTokenDialogState extends State<ApiAuthTokenDialog> {
                 ))),
         SimpleDialogOption(
           onPressed: () async {
-            await ApiAuthProvider.setToken(apiKeyValue);
+            await AuthCredentialProvider.setToken(apiKeyValue);
             final valid = await AuthController().validateAuthToken();
 
             if (!valid) {
-              await ApiAuthProvider.reset();
+              await AuthCredentialProvider.reset();
             }
 
             setState(() {

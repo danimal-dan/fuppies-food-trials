@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'log_food_page.dart';
-import '/http/api_auth_provider.dart';
+import '../http/auth_credential_provider.dart';
 import '/widget/api_auth_token_dialog.dart';
 
 class FuppiesHome extends StatefulWidget {
@@ -59,7 +59,7 @@ class _FuppiesHomeState extends State<FuppiesHome> {
             ElevatedButton(
               style: style,
               onPressed: () {
-                ApiAuthProvider.reset();
+                AuthCredentialProvider.reset();
                 _promptForApiTokenIfNotPresent(context, force: true);
               },
               child: const Text('Reset API Token'),
@@ -72,7 +72,7 @@ class _FuppiesHomeState extends State<FuppiesHome> {
 
   Future<void> _promptForApiTokenIfNotPresent(BuildContext context,
       {bool force = false}) async {
-    if (!force && await ApiAuthProvider.hasToken()) {
+    if (!force && await AuthCredentialProvider.hasToken()) {
       debugPrint("does have token");
       return;
     }
