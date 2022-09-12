@@ -5,7 +5,7 @@ import '/http/auth_credential_provider.dart';
 import '../util/snack_bar_util.dart';
 import '/widget/default_elevated_button.dart';
 import '/widget/default_page_container.dart';
-import '/widget/ui_constants.dart' as constants;
+import '../util/ui_constants.dart' as constants;
 import 'home.dart';
 
 class LoginPage extends StatefulWidget {
@@ -26,6 +26,10 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    Future.delayed(Duration.zero, () async {
+      _goHomeIfAlreadyLoggedIn(context);
+    });
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Login'),
@@ -124,6 +128,12 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   )))),
     );
+  }
+
+  void _goHomeIfAlreadyLoggedIn(BuildContext context) async {
+    if (await AuthCredentialProvider.hasCredentials()) {
+      _goToHome(context);
+    }
   }
 
   void _goToHome(BuildContext context) {

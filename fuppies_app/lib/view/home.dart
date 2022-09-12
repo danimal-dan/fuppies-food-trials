@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fuppies_app/util/snack_bar_util.dart';
 import 'package:fuppies_app/widget/default_elevated_button.dart';
-import 'package:fuppies_app/widget/ui_constants.dart' as constants;
+import 'package:fuppies_app/util/ui_constants.dart' as constants;
 import 'login.dart';
 import 'log_food_page.dart';
 import '../http/auth_credential_provider.dart';
