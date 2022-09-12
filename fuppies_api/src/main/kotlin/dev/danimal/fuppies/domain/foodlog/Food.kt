@@ -1,8 +1,14 @@
 package dev.danimal.fuppies.domain.foodlog
 
 enum class Food {
+    AVOCADO,
     BLUEBERRIES,
-    YUKON_POTATOES,
+    OATS,
     PUMPKIN,
     PEACHES,
+    QUINOA,
+    SPINACH,
+    STRAWBERRIES,
+    SWEET_POTATOES,
+    YUKON_POTATOES,
 }

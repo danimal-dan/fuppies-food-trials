@@ -1,10 +1,16 @@
 import 'package:recase/recase.dart';
 
 enum Food {
+  avocado("Avocado"),
   blueberries("Blueberries"),
-  yukonPotatoes("Yukon Potatoes"),
+  oats("Oats"),
   pumpkin("Pumpkin"),
-  peaches("Peaches");
+  peaches("Peaches"),
+  quinoa("Quinoa"),
+  spinach("Spinach"),
+  strawberries("Strawberries"),
+  sweetPotatoes("Sweet Potatoes"),
+  yukonPotatoes("Yukon Gold Potatoes");
 
   final String displayName;
 

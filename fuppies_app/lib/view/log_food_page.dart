@@ -4,9 +4,14 @@ import 'package:fuppies_app/model/food.dart';
 import 'package:fuppies_app/model/food_log_entry.dart';
 import 'package:fuppies_app/model/food_reaction.dart';
 import 'package:fuppies_app/model/volume_unit.dart';
+import 'package:fuppies_app/util/snack_bar_util.dart';
+import 'package:fuppies_app/view/home.dart';
+import 'package:fuppies_app/widget/default_elevated_button.dart';
+import 'package:fuppies_app/widget/default_page_container.dart';
 import 'package:fuppies_app/widget/food_list_dropdown.dart';
 import 'package:fuppies_app/widget/date_time_input.dart';
 import 'package:fuppies_app/widget/food_reaction_choice_chip.dart';
+import 'package:fuppies_app/widget/ui_constants.dart' as constants;
 
 class LogFoodPage extends StatefulWidget {
   const LogFoodPage({Key? key}) : super(key: key);
@@ -16,8 +21,6 @@ class LogFoodPage extends StatefulWidget {
 }
 
 class _LogFoodPageState extends State<LogFoodPage> {
-  static const SizedBox spacer = SizedBox(height: 24.0);
-
   final _formKey = GlobalKey();
   FoodLogEntry _model = FoodLogEntry();
   bool _isSaving = false;
@@ -30,8 +33,7 @@ class _LogFoodPageState extends State<LogFoodPage> {
       ),
       body: Form(
           key: _formKey,
-          child: Container(
-            padding: const EdgeInsets.all(24.0),
+          child: DefaultPageContainer(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
@@ -43,7 +45,7 @@ class _LogFoodPageState extends State<LogFoodPage> {
                             _model.food = food;
                           });
                         })),
-                spacer,
+                constants.defaultVerticalSpacer,
                 DateTimeInput(
                   defaultValue: _model.date,
                   onChanged: (DateTime? date) {
@@ -52,7 +54,7 @@ class _LogFoodPageState extends State<LogFoodPage> {
                     });
                   },
                 ),
-                spacer,
+                constants.defaultVerticalSpacer,
                 Row(
                   children: <Widget>[
                     Expanded(
@@ -97,7 +99,7 @@ class _LogFoodPageState extends State<LogFoodPage> {
                     ))
                   ],
                 ),
-                spacer,
+                constants.defaultVerticalSpacer,
                 Flexible(
                     child: FoodReactionChoiceChip(
                         defaultValue: _model.reaction,
@@ -106,12 +108,12 @@ class _LogFoodPageState extends State<LogFoodPage> {
                             _model.reaction = reaction;
                           });
                         })),
-                spacer,
+                constants.defaultVerticalSpacer,
                 Container(
                     padding: const EdgeInsets.symmetric(
                         vertical: 16.0, horizontal: 16.0),
-                    child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
+                    child: DefaultElevatedButton(
+                        style: DefaultElevatedButton.styleFrom(
                             padding: const EdgeInsets.all(16.0)),
                         onPressed: () async {
                           setState(() {
@@ -124,8 +126,22 @@ class _LogFoodPageState extends State<LogFoodPage> {
                             setState(() {
                               _model = response;
                             });
+                          } catch (e) {
+                            SnackBarUtil.showError(context,
+                                'An error occurred while saving this food entry.');
+
+                            return;
                           } finally {
-                            _isSaving = false;
+                            setState(() {
+                              _isSaving = false;
+                            });
+                          }
+
+                          if (mounted) {
+                            SnackBarUtil.showSuccess(
+                                context, 'Food entry saved!');
+
+                            _goToHome(context);
                           }
                         },
                         child: _isSaving
@@ -137,6 +153,13 @@ class _LogFoodPageState extends State<LogFoodPage> {
               ],
             ),
           )),
+    );
+  }
+
+  void _goToHome(BuildContext context) {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => const FuppiesHome()),
     );
   }
 }

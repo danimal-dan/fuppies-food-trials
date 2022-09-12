@@ -20,13 +20,13 @@ class _FuppiesHttpClient extends http.BaseClient {
 
   @override
   Future<http.StreamedResponse> send(http.BaseRequest request) async {
-    String? token = await AuthCredentialProvider.getToken();
-    if (token == null) {
-      ErrorDescription("Token is empty, cannot make API request");
+    String? credentials = await AuthCredentialProvider.getCredentials();
+    if (credentials == null) {
+      ErrorDescription("Credentials are empty, cannot make API request");
     }
 
     request.headers['Authorization'] =
-        "Basic ${base64.encode(utf8.encode('user:$token'))}";
+        "Basic ${base64.encode(utf8.encode(credentials!))}";
     request.headers['Content-type'] = 'application/json';
     return _inner.send(request);
   }
