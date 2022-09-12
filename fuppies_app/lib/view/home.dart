@@ -1,68 +1,62 @@
 import 'package:flutter/material.dart';
+import 'package:fuppies_app/util/snack_bar_util.dart';
+import 'package:fuppies_app/widget/default_elevated_button.dart';
+import 'package:fuppies_app/widget/ui_constants.dart' as constants;
+import 'login.dart';
 import 'log_food_page.dart';
 import '../http/auth_credential_provider.dart';
-import '/widget/api_auth_token_dialog.dart';
 
 class FuppiesHome extends StatefulWidget {
   static final navKey = GlobalKey<NavigatorState>();
 
-  const FuppiesHome({Key? navKey, required this.title}) : super(key: navKey);
-
-  final String title;
+  const FuppiesHome({Key? navKey}) : super(key: navKey);
 
   @override
   State<FuppiesHome> createState() => _FuppiesHomeState();
 }
 
 class _FuppiesHomeState extends State<FuppiesHome> {
-  final ButtonStyle style =
-      ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
-
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration.zero, () async {
-      await _promptForApiTokenIfNotPresent(context);
-    });
-
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: const Text('FPIES Food Trials'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            ElevatedButton(
-              style: style,
+            DefaultElevatedButton(
+              child: const Text('Log Food'),
               onPressed: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const LogFoodPage()),
                 );
               },
-              child: const Text('Log Food'),
             ),
-            ElevatedButton(
-              style: style,
-              onPressed: () {
-                debugPrint('pressed Log Symptom');
-              },
+            constants.defaultVerticalSpacer,
+            DefaultElevatedButton(
               child: const Text('Log Symptom'),
-            ),
-            ElevatedButton(
-              style: style,
               onPressed: () {
-                debugPrint('pressed Add Safe Food');
+                SnackBarUtil.showInfo(
+                    context, 'Log Symptom has not yet been implemented');
               },
+            ),
+            constants.defaultVerticalSpacer,
+            DefaultElevatedButton(
               child: const Text('Add Safe Food'),
-            ),
-            ElevatedButton(
-              style: style,
               onPressed: () {
-                AuthCredentialProvider.reset();
-                _promptForApiTokenIfNotPresent(context, force: true);
+                SnackBarUtil.showInfo(
+                    context, 'Add Safe Food has not yet been implemented');
               },
-              child: const Text('Reset API Token'),
+            ),
+            constants.defaultVerticalSpacer,
+            DefaultElevatedButton(
+              child: const Text('Logout'),
+              onPressed: () {
+                _logout(context);
+              },
             ),
           ],
         ),
@@ -70,18 +64,10 @@ class _FuppiesHomeState extends State<FuppiesHome> {
     );
   }
 
-  Future<void> _promptForApiTokenIfNotPresent(BuildContext context,
-      {bool force = false}) async {
-    if (!force && await AuthCredentialProvider.hasToken()) {
-      debugPrint("does have token");
-      return;
-    }
-
-    return await showDialog<void>(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context) {
-          return const ApiAuthTokenDialog();
-        });
+  Future<void> _logout(BuildContext context) async {
+    AuthCredentialProvider.reset();
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => const LoginPage()));
+    SnackBarUtil.showSuccess(context, "You have been logged out.");
   }
 }

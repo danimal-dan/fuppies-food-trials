@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'view/home.dart';
+import 'package:fuppies_app/view/login.dart';
+import 'package:fuppies_app/widget/ui_constants.dart' as constants;
 
 void main() {
   runApp(const MyApp());
@@ -14,9 +15,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'FPIES Food Trials',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const FuppiesHome(title: 'FPIES Food Trials'),
+          primarySwatch: constants.primarySwatch,
+          backgroundColor: constants.white,
+          appBarTheme: const AppBarTheme(foregroundColor: constants.white)),
+      home: const LoginPage(),
     );
   }
 }
