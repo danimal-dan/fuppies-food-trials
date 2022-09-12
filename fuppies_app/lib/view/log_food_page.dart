@@ -11,7 +11,7 @@ import 'package:fuppies_app/widget/default_page_container.dart';
 import 'package:fuppies_app/widget/food_list_dropdown.dart';
 import 'package:fuppies_app/widget/date_time_input.dart';
 import 'package:fuppies_app/widget/food_reaction_choice_chip.dart';
-import 'package:fuppies_app/widget/ui_constants.dart' as constants;
+import 'package:fuppies_app/util/ui_constants.dart' as constants;
 
 class LogFoodPage extends StatefulWidget {
   const LogFoodPage({Key? key}) : super(key: key);

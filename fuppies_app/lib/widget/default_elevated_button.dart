@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fuppies_app/widget/ui_constants.dart' as constants;
+import 'package:fuppies_app/util/ui_constants.dart' as constants;
 
 class DefaultElevatedButton extends ElevatedButton {
   DefaultElevatedButton({
